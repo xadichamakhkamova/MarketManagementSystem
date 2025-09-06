@@ -1,0 +1,98 @@
+syntax="proto3";
+
+option go_package = "./genproto/productpb";
+
+service ProductService {
+    rpc CreateProduct(CreateProductRequest) returns (CreateProductResponse);
+    rpc GetProductById(GetProductByIdRequest) returns (GetProductByIdResponse);
+    rpc GetProductByFilter(GetProductByFilterRequest) returns (GetProductByFilterResponse);
+    rpc UpdateStock(UpdateStockRequest) returns (UpdateStockResponse);
+    rpc UpdateProduct(UpdateProductRequest) returns (UpdateProductResponse);
+    rpc DeleteProduct(DeleteProductRequest) returns (DeleteProductResponse);
+}
+
+message Product {
+    string image_url = 1;
+    string id = 2;
+    string name = 3;
+    string unique_number = 4;
+    string bag_id = 5;
+    int64 price = 6;
+    string size = 7;
+    map<string, int32> colors = 8;
+    int32 count = 9;
+    repeated CUDP timestamp = 10;
+}
+
+message CreateProductRequest {
+    string image_url = 1;
+    string name = 2;
+    string unique_number = 3;
+    string bag_id = 4;
+    int64 price = 5;
+    string size = 6;
+    map<string, int32> colors = 7;
+    int32 count = 8;
+}
+
+message CreateProductResponse {
+    Product product = 1;
+}
+
+message GetProductByIdRequest {
+    string id = 1;
+}
+
+message GetProductByIdResponse {
+    Product product = 1;
+}
+
+message GetProductByFilterRequest {
+    string search = 1;
+}
+
+message GetProductByFilterResponse {
+    repeated Product products = 1;
+}
+
+message UpdateStockRequest {
+    int64 cost_price = 1;
+    int64 selling_price = 2;
+    string product_id = 3;
+    string product_color = 4;
+}
+
+message UpdateStockResponse {
+    bool isSuccess = 1;
+}
+
+message UpdateProductRequest {
+    string image_url = 1;
+    string id = 2;
+    string name = 3;
+    string unique_number = 4;
+    string bag_id = 5;
+    int64 price = 7;
+    string size = 8;
+    map<string, int32> colors = 9;
+    int32 count = 10;
+}
+
+message UpdateProductResponse {
+    Product product = 1;
+}
+
+message DeleteProductRequest {
+    string id = 1;
+}
+
+message DeleteProductResponse {
+    string name = 1;
+    string message = 2;
+}
+
+message CUDP {
+    string created_at = 1;
+    string updated_at = 2;
+    int32 deleted_at = 3;
+}

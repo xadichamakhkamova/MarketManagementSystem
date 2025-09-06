@@ -1,0 +1,31 @@
+api-gateway:
+  host: api_gateway
+  port: 9000
+
+token:
+  key: secret-key
+
+file:
+  cert: ./tls/cert.pem
+  key: ./tls/key.pem
+
+minio:
+  host: localhost
+  port: 9100
+  id: minioadmin
+  secret: minioadmin
+
+frontend:
+  host: localhost
+  port: 3000
+  
+services:
+  product-service:
+    host: localhost
+    port: 8001
+  dashboard-service:
+    host: localhost
+    port: 8002
+  debt-service:
+    host: localhost
+    port: 8003

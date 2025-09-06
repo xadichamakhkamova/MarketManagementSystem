@@ -1,0 +1,93 @@
+syntax = "proto3";
+
+option go_package = "genproto/debtpb";
+
+service DebtService{
+    rpc CreateDebt(CreateDebtReq) returns (DebtResp){}
+    rpc UpdateDebt(UpdateDebtReq) returns (DebtResp){}
+    rpc DeleteDebt(DeleteDebtReq) returns (DebtResp){}
+    rpc GetDebtById(GetDebtByIdReq) returns (DebtResp){}
+    rpc GetDebtByFilter(GetDebtByFilterReq) returns (GetDebtByFilterResp){}
+}
+
+message Debt{
+    string id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string phone_number = 4;
+    string jshshir = 5;
+    string address = 6;
+    string bag_id = 7;
+    string price = 8;
+    string price_paid = 9;
+    string acquaintance = 10;
+    string collateral = 11;
+    string deadline = 12;
+    DebtCUD DebtCUD = 13;
+}
+
+message DebtCUD{
+    string created_at = 1;
+    string updated_at = 2;
+    int64 deleted_at = 3;
+}
+
+// Create Debt
+message CreateDebtReq{
+    string first_name = 1;
+    string last_name = 2;
+    string phone_number = 3;
+    string jshshir = 4;
+    string address = 5;
+    string bag_id = 6;
+    string price = 7;
+    string price_paid = 8;
+    string acquaintance = 9;
+    string collateral = 10;
+    string deadline = 11;
+}
+
+// Update Debt
+message UpdateDebtReq{
+    string id = 1;
+    string first_name = 2;
+    string last_name = 3;
+    string phone_number = 4;
+    string jshshir = 5;
+    string address = 6;
+    string bag_id = 7;
+    string price = 8;
+    string price_paid = 9;
+    string acquaintance = 10;
+    string collateral = 11;
+    string deadline = 12;
+}
+
+// Delete Debt
+message DeleteDebtReq{
+    string id = 1;
+}
+
+// Get Debt By ID
+message GetDebtByIdReq{
+    string id = 1;
+}
+
+// Get Debt By Filter Request
+message GetDebtByFilterReq{
+    string search = 1;
+}
+
+// Get Debt By Filter Response
+message GetDebtByFilterResp{
+    bool status = 1;
+    string message = 2;
+    int32 getCountResp = 3;
+    repeated Debt debt = 4;
+}
+
+message DebtResp{
+    bool status = 1;
+    string message = 2;
+    Debt debt = 3;
+}

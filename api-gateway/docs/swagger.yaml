@@ -1,0 +1,606 @@
+basePath: /
+definitions:
+  models.CUDP:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.CreateDebtReq:
+    properties:
+      acquaintance:
+        type: string
+      address:
+        type: string
+      bag_id:
+        type: string
+      collateral:
+        type: string
+      deadline:
+        type: string
+      first_name:
+        type: string
+      jshshir:
+        type: string
+      last_name:
+        type: string
+      phone_number:
+        type: string
+      price:
+        type: string
+      price_paid:
+        type: string
+    type: object
+  models.CreateProductResponse:
+    properties:
+      product:
+        $ref: '#/definitions/models.Product'
+    type: object
+  models.Debt:
+    properties:
+      acquaintance:
+        type: string
+      address:
+        type: string
+      bag_id:
+        type: string
+      collateral:
+        type: string
+      deadline:
+        type: string
+      debt_cud:
+        $ref: '#/definitions/models.DebtCUD'
+      first_name:
+        type: string
+      id:
+        type: string
+      jshshir:
+        type: string
+      last_name:
+        type: string
+      phone_number:
+        type: string
+      price:
+        type: string
+      price_paid:
+        type: string
+    type: object
+  models.DebtCUD:
+    properties:
+      created_at:
+        type: string
+      deleted_at:
+        type: integer
+      updated_at:
+        type: string
+    type: object
+  models.DebtResp:
+    properties:
+      debt:
+        $ref: '#/definitions/models.Debt'
+      message:
+        type: string
+      status:
+        type: boolean
+    type: object
+  models.DeleteProductResponse:
+    properties:
+      message:
+        type: string
+      name:
+        type: string
+    type: object
+  models.GetDebtByFilterResp:
+    properties:
+      debt:
+        items:
+          $ref: '#/definitions/models.Debt'
+        type: array
+      get_count_resp:
+        type: integer
+      message:
+        type: string
+      status:
+        type: boolean
+    type: object
+  models.GetProductByFilterResponse:
+    properties:
+      products:
+        items:
+          $ref: '#/definitions/models.Product'
+        type: array
+    type: object
+  models.GetProductByIdResponse:
+    properties:
+      product:
+        $ref: '#/definitions/models.Product'
+    type: object
+  models.Product:
+    properties:
+      bag_id:
+        type: string
+      colors:
+        additionalProperties:
+          type: integer
+        type: object
+      count:
+        type: integer
+      id:
+        type: string
+      image_url:
+        type: string
+      name:
+        type: string
+      price:
+        type: integer
+      size:
+        type: string
+      timestamp:
+        items:
+          $ref: '#/definitions/models.CUDP'
+        type: array
+      unique_number:
+        type: string
+    type: object
+  models.UpdateDebtReq:
+    properties:
+      acquaintance:
+        type: string
+      address:
+        type: string
+      bag_id:
+        type: string
+      collateral:
+        type: string
+      deadline:
+        type: string
+      first_name:
+        type: string
+      id:
+        type: string
+      jshshir:
+        type: string
+      last_name:
+        type: string
+      phone_number:
+        type: string
+      price:
+        type: string
+      price_paid:
+        type: string
+    type: object
+  models.UpdateProductRequest:
+    properties:
+      bag_id:
+        type: string
+      colors:
+        additionalProperties:
+          type: integer
+        type: object
+      count:
+        type: integer
+      id:
+        type: string
+      image_url:
+        type: string
+      name:
+        type: string
+      price:
+        type: integer
+      size:
+        type: string
+      unique_number:
+        type: string
+    type: object
+  models.UpdateProductResponse:
+    properties:
+      product:
+        $ref: '#/definitions/models.Product'
+    type: object
+  models.UpdateStockRequest:
+    properties:
+      cost_price:
+        type: integer
+      product_color:
+        type: string
+      product_id:
+        type: string
+      selling_price:
+        type: integer
+    type: object
+  models.UpdateStockResponse:
+    properties:
+      is_success:
+        type: boolean
+    type: object
+host: localhost:9000
+info:
+  contact: {}
+  description: Api-gateway service
+  version: "1.0"
+paths:
+  /dashboard:
+    get:
+      consumes:
+      - application/json
+      description: This method gets dashboard reports
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: GET DASHBOARD REPORTS
+      tags:
+      - DASHBOARD
+  /debts:
+    get:
+      consumes:
+      - application/json
+      description: This method gets debts list by filter
+      parameters:
+      - description: Debt search
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetDebtByFilterResp'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: GET DEBTS BY FILTER
+      tags:
+      - DEBTS
+    post:
+      consumes:
+      - application/json
+      description: This method creates debts
+      parameters:
+      - description: Debt
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/models.CreateDebtReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DebtResp'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: CREATE DEBTS
+      tags:
+      - DEBTS
+  /debts/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: This method deletes debts
+      parameters:
+      - description: Debt Id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DebtResp'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: DELETE DEBTS
+      tags:
+      - DEBTS
+    get:
+      consumes:
+      - application/json
+      description: This method gets debt by id
+      parameters:
+      - description: Debt Id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DebtResp'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: GET DEBTS BY ID
+      tags:
+      - DEBTS
+    put:
+      consumes:
+      - application/json
+      description: This method updates debts
+      parameters:
+      - description: Debt id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Debt
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateDebtReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DebtResp'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: UPDATE DEBTS
+      tags:
+      - DEBTS
+  /products:
+    get:
+      consumes:
+      - application/json
+      description: This method gets products list by filter
+      parameters:
+      - description: Product search
+        in: query
+        name: search
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetProductByFilterResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: GET PRODUCTS LIST
+      tags:
+      - PRODUCTS
+    post:
+      consumes:
+      - multipart/form-data
+      description: This method creates products
+      parameters:
+      - description: Product Image
+        in: formData
+        name: file
+        required: true
+        type: file
+      - description: Product JSON Data
+        in: formData
+        name: product
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.CreateProductResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: CREATE PRODUCTS
+      tags:
+      - PRODUCTS
+    put:
+      consumes:
+      - application/json
+      description: This method updates stock
+      parameters:
+      - description: Product
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateStockRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UpdateStockResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: UPDATE STOCK
+      tags:
+      - PRODUCTS
+  /products/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: This method deletes products
+      parameters:
+      - description: Product Id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.DeleteProductResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: DELETE PRODUCT
+      tags:
+      - PRODUCTS
+    get:
+      consumes:
+      - application/json
+      description: This method gets product by id
+      parameters:
+      - description: Product Id
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.GetProductByIdResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: GET PRODUCT BY ID
+      tags:
+      - PRODUCTS
+    put:
+      consumes:
+      - application/json
+      description: This method updates products
+      parameters:
+      - description: Product id
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Product
+        in: body
+        name: product
+        required: true
+        schema:
+          $ref: '#/definitions/models.UpdateProductRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.UpdateProductResponse'
+        "400":
+          description: Bad Request
+          schema:
+            type: string
+        "500":
+          description: Internal Server Error
+          schema:
+            type: string
+      security:
+      - BearerAuth: []
+      summary: UPDATE PRODUCTS
+      tags:
+      - PRODUCTS
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

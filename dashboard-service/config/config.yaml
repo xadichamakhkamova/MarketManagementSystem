@@ -1,0 +1,15 @@
+service:
+  host: localhost
+  port: 8002
+
+kafka:
+  host: localhost
+  port: 9092
+  topic: products
+
+postgres:
+  host: localhost
+  port: 5432
+  user: postgres
+  password: 1
+  database: dashboarddb

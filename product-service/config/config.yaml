@@ -1,0 +1,14 @@
+service:
+  host: localhost
+  port: 8001
+
+kafka:
+  host: localhost
+  port: 9092
+  topic: products
+
+mongodb:
+  host: localhost
+  port: 27017
+  database: productdb
+  collection: products
