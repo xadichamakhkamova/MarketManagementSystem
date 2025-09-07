@@ -1,13 +1,14 @@
-PROTO_DIR=proto
-PROTO_FILE=dashboard-service.proto
+# .env fayldan DB_URL o'qish
+ifneq (,$(wildcard .env))
+	include .env
+	export
+endif
 
 gen-proto:
 	@protoc \
 		--go_out=. \
 		--go-grpc_out=. \
-		$(PROTO_DIR)/$(PROTO_FILE)
-
-DB_URL=postgres://postgres:1@localhost:5432/dashboarddb?sslmode=disable
+		proto/dashboard-service.proto
 
 mig-create:
 	@migrate create -ext sql -dir migrations -seq create_dashboarddb_table

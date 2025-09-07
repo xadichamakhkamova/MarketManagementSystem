@@ -1,4 +1,8 @@
-DB_URL = postgres://postgres:1@localhost:5432/debtsdb?sslmode=disable
+# .env fayldan DB_URL o'qish
+ifneq (,$(wildcard .env))
+	include .env
+	export
+endif
 
 gen-proto:
 	@protoc \
