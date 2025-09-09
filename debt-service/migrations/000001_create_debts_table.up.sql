@@ -16,6 +16,3 @@ CREATE TABLE IF NOT EXISTS debts(
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     deleted_at BIGINT DEFAULT 0
 );
-
--- 1 berilmadi
--- 2 berildi
