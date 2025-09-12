@@ -1,0 +1,27 @@
+# Ignore all env files
+*.env
+
+# Ignore all config.yaml files in all services
+**/config.yaml
+**/config/config.yaml
+
+# Ignore TLS certs
+**/tls/*.pem
+
+# Ignore logs
+**/logs/*.log
+
+# Ignore Go build/cache
+bin/
+*.out
+
+# Ignore IDE/editor configs
+.vscode/
+.idea/
+
+# Ignore vendor (if not used)
+vendor/
+
+# Ignore docs build
+api-gateway/docs/swagger.json
+api-gateway/docs/swagger.yaml
