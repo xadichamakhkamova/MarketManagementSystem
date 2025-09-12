@@ -1,6 +1,6 @@
 # Market Management System
 
-A modular, microservices-based platform designed to streamline **supermarket and retail operations**. The system provides comprehensive management for products, inventory, debts, and analytics while leveraging modern technologies like gRPC, Kafka, PostgreSQL, MongoDB, MinIO, and Swagger for documentation.
+A modular, microservices-based platform designed to streamline **supermarket and retail operations**. The system provides comprehensive management for products, inventory, debts, and analytics while leveraging modern technologies like gRPC, Kafka, PostgreSQL, MongoDB, MinIO, WebSocket and Swagger for documentation.
 
 ---
 
@@ -38,7 +38,7 @@ Provides real-time reporting and analytics for sales, stock, and debts.
 - **Backend:** Go (Golang)  
 - **Communication:** gRPC, HTTPS  
 - **Databases:** PostgreSQL, MongoDB  
-- **Messaging:** Apache Kafka  
+- **Messaging:** Apache Kafka, WebSocket
 - **File Storage:** MinIO (for product images)  
 - **Logging:** Logrus  
 - **API Documentation:** Swagger  
