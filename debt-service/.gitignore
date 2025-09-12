@@ -1,2 +1,3 @@
 .env
 config/config.yaml
+logs/debt-service.log

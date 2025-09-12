@@ -1,4 +1,3 @@
-# .env fayldan DB_URL o'qish
 ifneq (,$(wildcard .env))
 	include .env
 	export
